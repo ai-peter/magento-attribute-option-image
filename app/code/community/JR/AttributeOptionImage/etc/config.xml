@@ -36,7 +36,7 @@
         <blocks>
             <adminhtml>
                 <rewrite>
-                    <catalog_product_attribute_edit_tab_options>JR_AttributeOptionImage_Block_Catalog_Product_Attribute_Edit_Tab_Options</catalog_product_attribute_edit_tab_options>
+                    <catalog_product_attribute_edit_tab_options>JR_AttributeOptionImage_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Options</catalog_product_attribute_edit_tab_options>
                 </rewrite>
             </adminhtml>
         </blocks>
@@ -56,7 +56,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <JR_AttributeOptionImage before="Mage_Adminhtml">JR_AttributeOptionImage</JR_AttributeOptionImage>
+                        <JR_AttributeOptionImage before="Mage_Adminhtml">JR_AttributeOptionImage_Adminhtml</JR_AttributeOptionImage>
                     </modules>
                 </args>
             </adminhtml>
