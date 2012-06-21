@@ -2,36 +2,40 @@
 <config>
     <modules>
         <JR_AttributeOptionImage>
-            <version>1.0.1</version>
+            <version>1.1.0</version>
         </JR_AttributeOptionImage>
     </modules>
     <global>
         <resources>
-            <jr_attributeoptionimage_setup>
+            <aoi_setup>
                 <setup>
                     <module>JR_AttributeOptionImage</module>
                 </setup>
-            </jr_attributeoptionimage_setup>
+            </aoi_setup>
         </resources>
         <models>
-             <jr_attributeoptionimage>
+             <aoi>
                 <class>JR_AttributeOptionImage_Model</class>
-             </jr_attributeoptionimage>
-            <catalog_resource_eav_mysql4>
+                <resourceModel>aoi_resource</resourceModel>
+             </aoi>
+             <aoi_resource>
+                <class>JR_AttributeOptionImage_Model_Resource</class>
+                <entities>
+                    <catalog_eav_attribute_option>
+                        <table>catalog_eav_attribute_option</table>
+                    </catalog_eav_attribute_option>
+                </entities>
+            </aoi_resource>
+            <catalog>
                 <rewrite>
-                    <attribute>JR_AttributeOptionImage_Model_Catalog_Resource_Eav_Mysql4_Attribute</attribute>
+                    <resource_eav_attribute>JR_AttributeOptionImage_Model_Resource_Catalog_Eav_Attribute</resource_eav_attribute>
                 </rewrite>
-            </catalog_resource_eav_mysql4>
-            <eav>
+            </catalog>
+            <catalog_resource>
                 <rewrite>
-                    <entity_attribute_source_table>JR_AttributeOptionImage_Model_Eav_Entity_Attribute_Source_Table</entity_attribute_source_table>
+                    <attribute>JR_AttributeOptionImage_Model_Resource_Catalog_Attribute</attribute>
                 </rewrite>
-            </eav>
-            <eav_mysql4>
-                <rewrite>
-                    <entity_attribute_option>JR_AttributeOptionImage_Model_Eav_Mysql4_Entity_Attribute_Option</entity_attribute_option>
-                </rewrite>
-            </eav_mysql4>
+            </catalog_resource>
         </models>
         <blocks>
             <adminhtml>
@@ -41,9 +45,9 @@
             </adminhtml>
         </blocks>
         <helpers>
-            <attributeoptionimage>
+            <aoi>
                 <class>JR_AttributeOptionImage_Helper</class>
-            </attributeoptionimage>
+            </aoi>
             <cms>
                 <rewrite>
                     <wysiwyg_images>JR_AttributeOptionImage_Helper_Cms_Wysiwyg_Images</wysiwyg_images>
@@ -67,7 +71,7 @@
             <controller_action_layout_render_before_adminhtml_catalog_product_attribute_edit>
                 <observers>
                     <update_layout>
-                        <class>jr_attributeoptionimage/observer</class>
+                        <class>JR_AttributeOptionImage_Model_Observer</class>
                         <method>updateLayout</method>
                     </update_layout>
                 </observers>

@@ -1,17 +1,36 @@
 <?php
 
+/**
+ * Product attribute add/edit form options tab
+ *
+ * Overrides the core implementation.
+ */
 class JR_AttributeOptionImage_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Options extends Mage_Adminhtml_Block_Catalog_Product_Attribute_Edit_Tab_Options
 {
+    /**
+     * Contructor
+     */
     public function __construct()
     {
         parent::__construct();
         $this->setTemplate('jr/catalog/product/attribute/options.phtml');
     }
 
+    /**
+     * Retrieve attribute option values if attribute input type select or multiselect
+     * 
+     * Take care of it with every new Magento version, it's a copy cat.
+     * 
+     * @return array
+     * 
+     * @version 1.7.0.0
+     */
     public function getOptionValues()
     {
+        
         $attributeType = $this->getAttributeObject()->getFrontendInput();
         $defaultValues = $this->getAttributeObject()->getDefaultValue();
+        
         if ($attributeType == 'select' || $attributeType == 'multiselect') {
             $defaultValues = explode(',', $defaultValues);
         } else {
@@ -33,7 +52,7 @@ class JR_AttributeOptionImage_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab
         $values = $this->getData('option_values');
         if (is_null($values)) {
             $values = array();
-            $optionCollection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+            $optionCollection = Mage::getResourceModel('aoi/catalog_attribute_option_collection') // [patch]
                 ->setAttributeFilter($this->getAttributeObject()->getId())
                 ->setPositionOrder('desc', true)
                 ->load();
@@ -49,8 +68,8 @@ class JR_AttributeOptionImage_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab
                 $value['intype'] = $inputType;
                 $value['id'] = $option->getId();
                 $value['sort_order'] = $option->getSortOrder();
-                $value['image'] = $option->getImage();
-                $value['thumb'] = $option->getThumb();
+                $value['image'] = $option->getImage(); // [patch]
+                $value['thumbnail'] = $option->getThumbnail(); // [patch]
                 foreach ($this->getStores() as $store) {
                     $storeValues = $this->getStoreOptionValues($store->getId());
                     if (isset($storeValues[$option->getId()])) {
