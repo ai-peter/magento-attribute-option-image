@@ -2,7 +2,26 @@
 
 class JR_AttributeOptionImage_Model_Resource_Catalog_Attribute extends Mage_Catalog_Model_Resource_Attribute
 {
-/**
+    /**
+     * Perform actions before object save
+     *
+     * @see Mage_Eav_Model_Resource_Entity_Attribute::_beforeSave()
+     * @param Mage_Core_Model_Abstract $object
+     * @return Mage_Catalog_Model_Resource_Attribute
+     */
+    protected function _beforeSave(Mage_Core_Model_Abstract $object) 
+    {
+        parent::_beforeSave($object);
+        
+        if ((!$object->getId() || $object->getSourceModel() == 'eav/entity_attribute_source_table')
+            && ($object->getFrontendInput() == 'select' && $object->getBackendType() == 'int')) {
+            $object->setSourceModel('aoi/catalog_entity_attribute_source_table');
+        }
+        
+        return $this;
+    }
+    
+    /**
      * Perform actions after object save
      *
      * @param  Mage_Core_Model_Abstract $object
