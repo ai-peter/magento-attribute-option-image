@@ -28,6 +28,7 @@
             </aoi_resource>
             <catalog>
                 <rewrite>
+                    <layer_filter_attribute>JR_AttributeOptionImage_Model_Catalog_Layer_Filter_Attribute</layer_filter_attribute>
                     <resource_eav_attribute>JR_AttributeOptionImage_Model_Resource_Catalog_Eav_Attribute</resource_eav_attribute>
                 </rewrite>
             </catalog>
