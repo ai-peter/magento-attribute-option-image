@@ -61,5 +61,48 @@ class JR_AttributeOptionImage_Model_Catalog_Layer_Filter_Attribute extends Mage_
         }
         return $data;
     }
+    
+    /**
+     * Initialize filter items
+     *
+     * @return  Mage_Catalog_Model_Layer_Filter_Abstract
+     */
+    protected function _initItems()
+    {
+        $data = $this->_getItemsData();
+        $items=array();
+        foreach ($data as $itemData) {
+            $items[] = $this->_createExtendedItem(
+                $itemData['label'],
+                $itemData['value'],
+                $itemData['count'],
+                $itemData['image'],
+                $itemData['thumbnail']
+            );
+        }
+        $this->_items = $items;
+        return $this;
+    }
+    
+    /**
+     * Create extended filter item object
+     *
+     * @param   string $label
+     * @param   mixed $value
+     * @param   int $count
+     * @param   string $image
+     * @param   string $thumbnail
+     * @return  Mage_Catalog_Model_Layer_Filter_Item
+     */
+    protected function _createExtendedItem($label, $value, $count = 0, $image = '', $thumbnail = '')
+    {
+        return Mage::getModel('catalog/layer_filter_item')
+            ->setFilter($this)
+            ->setLabel($label)
+            ->setValue($value)
+            ->setCount($count)
+            ->setImage($image)
+            ->setThumbnail($thumbnail);
+    }
 }
 
