@@ -49,7 +49,7 @@ if ($connection->tableColumnExists($mainTable, 'image')
             array('main_table.option_id', 'main_table.image', 'main_table.thumb')
         )
         ->where('main_table.image IS NOT NULL OR main_table.thumb IS NOT NULL');
-    $query = $select->insertFromSelect($additionalTable, array('image', 'thumbnail'));
+    $query = $select->insertFromSelect($additionalTable, array('option_id', 'image', 'thumbnail'));
     $connection->query($query);
 }
 
